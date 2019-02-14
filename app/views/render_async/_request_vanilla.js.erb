@@ -26,7 +26,10 @@
       if (request.readyState === 4) {
         if (request.status >= SUCCESS && request.status < ERROR) {
           var container = document.getElementById('<%= container_id %>');
-          container.outerHTML = request.response;
+          
+          if(container) {
+            container.outerHTML = request.response;
+          }
 
           <% if event_name.present? %>
             var event = undefined;
@@ -40,7 +43,10 @@
           <% end %>
         } else {
           var container = document.getElementById('<%= container_id %>');
-          container.outerHTML = '<%= error_message.try(:html_safe) %>';
+          
+          if(container) {
+            container.outerHTML = '<%= error_message.try(:html_safe) %>';
+          }
 
           <% if error_event_name.present? %>
             var event = undefined;
